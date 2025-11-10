@@ -5,7 +5,7 @@
 - [x] Task 1: Project Setup
 - [x] Task 2: FastAPI Endpoint Skeleton
 - [x] Task 3: GeocodingService
-- [ ] Task 4: WeatherService
+- [x] Task 4: WeatherService
 - [ ] Task 5: Integration
 - [ ] Task 6: Configuration & Models
 - [ ] Task 7: Testing & Refinement
