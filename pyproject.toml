@@ -17,3 +17,8 @@ dev = [
     "pytest-asyncio>=1.2.0",
     "ruff>=0.14.4",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"

@@ -6,10 +6,11 @@
 - [x] Task 2: FastAPI Endpoint Skeleton
 - [x] Task 3: GeocodingService
 - [x] Task 4: WeatherService
-- [ ] Task 5: Integration
+- [x] Task 5: Integration
 - [ ] Task 6: Configuration & Models
 - [ ] Task 7: Testing & Refinement
 - [ ] Task 8: Caching (Future)
+- [ ] Task 9: Tech Debt & Cleanup
 
 ## Task Overview
 
@@ -148,6 +149,13 @@ weather-api/
 - In-memory caching implementation
 - Cache configuration in `config.py`
 - Performance improvement documentation
+
+### Task 9: Tech Debt & Cleanup
+
+- Replace fastapi cli with direct uvicorn invocation in `main.py`
+
+**Deliverables:**
+- Direct uvicorn invocation instead of FastAPI CLI wrapper
 
 ## Running the Application
 

@@ -1,18 +1,18 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
 
-
-app = FastAPI(
-    title="Weather API", description="Simple weather API"
+from services.geocoding import GeocodingService
+from services.weather import WeatherService
+from models.weather import WeatherResponse
+from exceptions import (
+    LocationNotFoundError,
+    ExternalServiceError,
+    DataParseError,
 )
 
 
-class WeatherResponse(BaseModel):
-    location: str
-    latitude: float
-    longitude: float
-    temperature_celsius: float
-    precipitation_mm: float
+app = FastAPI(
+    title="Weather API", description="Simple weather API with Open-Meteo integration"
+)
 
 
 @app.get("/weather", response_model=WeatherResponse)
@@ -27,14 +27,29 @@ async def get_weather(location: str) -> WeatherResponse:
             status_code=400, detail="Location parameter cannot be empty"
         )
 
-    # Stub response for now
-    return WeatherResponse(
-        location=location,
-        latitude=39.7392,
-        longitude=-104.9903,
-        temperature_celsius=15.2,
-        precipitation_mm=0.0,
-    )
+    try:
+        # Get coordinates from location string
+        geocoding_service = GeocodingService()
+        latitude, longitude = await geocoding_service.get_coordinates(location)
+
+        # Get weather for those coordinates
+        weather_service = WeatherService()
+        weather = await weather_service.get_weather(latitude, longitude)
+
+        return WeatherResponse(
+            location=location,
+            latitude=latitude,
+            longitude=longitude,
+            temperature_fahrenheit=weather.temperature_fahrenheit,
+            precipitation_inch=weather.precipitation_inch,
+        )
+
+    except LocationNotFoundError:
+        raise HTTPException(status_code=404, detail=f"Location not found: {location}")
+    except ExternalServiceError as e:
+        raise HTTPException(status_code=503, detail=f"External service error: {str(e)}")
+    except DataParseError as e:
+        raise HTTPException(status_code=500, detail=f"Data parsing error: {str(e)}")
 
 
 if __name__ == "__main__":
