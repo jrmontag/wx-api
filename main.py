@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException, Depends
 
 from services.geocoding import GeocodingService
 from services.weather import WeatherService
-from models.weather import WeatherResponse
+from models import WeatherResponse, Location
 from exceptions import (
     LocationNotFoundError,
     ExternalServiceError,
@@ -43,16 +43,19 @@ async def get_weather(
         )
 
     try:
-        # Get coordinates from location string
-        latitude, longitude = await geocoding_service.get_coordinates(location)
+        # Get location data (coordinates and country)
+        location_data: Location = await geocoding_service.get_coordinates(location)
 
         # Get weather for those coordinates
-        weather = await weather_service.get_weather(latitude, longitude)
+        weather = await weather_service.get_weather(
+            location_data.latitude, location_data.longitude
+        )
 
         return WeatherResponse(
             location=location,
-            latitude=latitude,
-            longitude=longitude,
+            latitude=location_data.latitude,
+            longitude=location_data.longitude,
+            country=location_data.country,
             temperature_fahrenheit=weather.temperature_fahrenheit,
             precipitation_inch=weather.precipitation_inch,
         )

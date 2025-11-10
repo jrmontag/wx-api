@@ -26,6 +26,7 @@ def test_weather_endpoint_valid_city(client):
     assert data["location"] == "Denver"
     assert approx_equals(data["latitude"], 39.73915)
     assert approx_equals(data["longitude"], -104.9847)
+    assert data["country"] == "United States"
     assert isinstance(data["temperature_fahrenheit"], float)
     assert isinstance(data["precipitation_inch"], float)
 
@@ -39,6 +40,7 @@ def test_weather_endpoint_valid_postal_code(client):
     assert data["location"] == "80202"
     assert approx_equals(data["latitude"], 39.73915)
     assert approx_equals(data["longitude"], -104.9847)
+    assert data["country"] == "United States"
     assert isinstance(data["temperature_fahrenheit"], float)
     assert isinstance(data["precipitation_inch"], float)
 
@@ -53,6 +55,7 @@ def test_weather_endpoint_ambiguous_location(client):
     # Springfield, Missouri is around 37.21°N, 93.30°W
     assert approx_equals(data["latitude"], 37.21533)
     assert approx_equals(data["longitude"], -93.29824)
+    assert data["country"] == "United States"
 
 
 def test_weather_endpoint_invalid_location(client):

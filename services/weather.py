@@ -2,7 +2,7 @@ import logging
 
 import httpx
 
-from models.weather import WeatherStatus
+from models import WeatherStatus
 
 logger = logging.getLogger(__name__)
 
