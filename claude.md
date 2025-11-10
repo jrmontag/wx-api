@@ -1,5 +1,4 @@
 # Shell commands
-From the 
 - `uv run fastapi dev` - run the main application in development mode
 - `uv run fastapi run` - run the main application in production mode
 
@@ -9,4 +8,5 @@ From the
 - `uv run ruff format` - format the code
 
 # Workflow 
-- Every few changes, run the linter and reformat the code 
+- After each change, run the linter and reformat the code 
+- After each task, ask for confirmation and then commit the changes

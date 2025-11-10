@@ -4,10 +4,10 @@
 
 - [x] Task 1: Project Setup
 - [x] Task 2: FastAPI Endpoint Skeleton
-- [ ] Task 3: Configuration & Models
-- [ ] Task 4: GeocodingService
-- [ ] Task 5: WeatherService
-- [ ] Task 6: Integration
+- [x] Task 3: GeocodingService
+- [ ] Task 4: WeatherService
+- [ ] Task 5: Integration
+- [ ] Task 6: Configuration & Models
 - [ ] Task 7: Testing & Refinement
 - [ ] Task 8: Caching (Future)
 
@@ -53,18 +53,7 @@ weather-api/
 - `/weather` endpoint returning stub data
 - OpenAPI docs available at `/docs`
 
-### Task 3: Configuration & Models
-- Create `config.py` with API URLs
-- Define response models in `models/responses.py`
-- Define custom exceptions in `exceptions.py`
-
-**Deliverables:**
-- `config.py`: API base URLs, timeout values, constants
-- `models/responses.py`: WeatherResponse and ErrorResponse models
-- `exceptions.py`: LocationNotFoundError, ExternalServiceError, DataParseError
-
-
-### Task 4: GeocodingService
+### Task 3: GeocodingService
 - Implement `GeocodingService` in `services/geocoding.py`
 - Handle API calls with httpx
 - Parse response, return first result
@@ -81,7 +70,7 @@ weather-api/
 - Method to convert location string → lat/lon
 - Proper error handling and exceptions
 
-### Task 5: WeatherService
+### Task 4: WeatherService
 - Implement `WeatherService` in `services/weather.py`
 - Handle API calls with httpx
 - Extract temperature and precipitation
@@ -101,7 +90,7 @@ weather-api/
 - Method to fetch weather data from lat/lon
 - Proper error handling and exceptions
 
-### Task 6: Integration
+### Task 5: Integration
 - Integrate GeocodingService into `/weather` endpoint
 - Integrate WeatherService into `/weather` endpoint
 - Map exceptions to HTTP status codes
@@ -118,6 +107,16 @@ weather-api/
 - Fully functional `/weather` endpoint
 - Proper error responses with JSON details
 - Complete request flow: location → geocoding → weather → response
+
+### Task 6: Configuration & Models
+- Create `config.py` with API URLs
+- Define response models in `models/responses.py`
+- Define custom exceptions in `exceptions.py`
+
+**Deliverables:**
+- `config.py`: API base URLs, timeout values, constants
+- `models/responses.py`: WeatherResponse and ErrorResponse models
+- `exceptions.py`: LocationNotFoundError, ExternalServiceError, DataParseError
 
 ### Task 7: Testing & Refinement
 - Test via OpenAPI docs at `/docs`
@@ -139,7 +138,7 @@ weather-api/
 - Any bug fixes or refinements
 - Verification of all error scenarios
 
-### Task 8 (Future): Caching
+### Task 8: Caching (Future)
 - Add cachetools dependency
 - Implement TTL cache for geocoding (24h)
 - Implement TTL cache for weather (30-60min)
