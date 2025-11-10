@@ -1,3 +1,4 @@
+from typing_extensions import Annotated
 from fastapi import FastAPI, HTTPException, Depends
 
 from services.geocoding import GeocodingService
@@ -28,8 +29,8 @@ def get_weather_service() -> WeatherService:
 @app.get("/weather", response_model=WeatherResponse)
 async def get_weather(
     location: str,
-    geocoding_service: GeocodingService = Depends(get_geocoding_service),
-    weather_service: WeatherService = Depends(get_weather_service),
+    geocoding_service: Annotated[GeocodingService, Depends(get_geocoding_service)],
+    weather_service: Annotated[WeatherService, Depends(get_weather_service)],
 ) -> WeatherResponse:
     """
     Get current weather for a specified location.

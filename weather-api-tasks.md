@@ -153,6 +153,8 @@ weather-api/
 ### Task 9: Tech Debt & Cleanup
 
 - Replace fastapi cli with direct uvicorn invocation in `main.py`
+- Revisit dependency injection e.g. services, look at [lumigator project](https://github.com/mozilla-ai/lumigator/blob/main/lumigator/backend/backend/api/deps.py#L47)
+
 
 **Deliverables:**
 - Direct uvicorn invocation instead of FastAPI CLI wrapper
