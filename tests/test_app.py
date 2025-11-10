@@ -6,6 +6,11 @@ from fastapi.testclient import TestClient
 from main import app
 
 
+def approx_equals(actual: float, expected: float, tolerance: float = 0.01) -> bool:
+    """Check if two floats are approximately equal within tolerance."""
+    return abs(actual - expected) < tolerance
+
+
 @pytest.fixture
 def client():
     """Create a test client."""
@@ -19,8 +24,8 @@ def test_weather_endpoint_valid_city(client):
     assert response.status_code == 200
     data = response.json()
     assert data["location"] == "Denver"
-    assert isinstance(data["latitude"], float)
-    assert isinstance(data["longitude"], float)
+    assert approx_equals(data["latitude"], 39.73915)
+    assert approx_equals(data["longitude"], -104.9847)
     assert isinstance(data["temperature_fahrenheit"], float)
     assert isinstance(data["precipitation_inch"], float)
 
@@ -32,8 +37,8 @@ def test_weather_endpoint_valid_postal_code(client):
     assert response.status_code == 200
     data = response.json()
     assert data["location"] == "80202"
-    assert isinstance(data["latitude"], float)
-    assert isinstance(data["longitude"], float)
+    assert approx_equals(data["latitude"], 39.73915)
+    assert approx_equals(data["longitude"], -104.9847)
     assert isinstance(data["temperature_fahrenheit"], float)
     assert isinstance(data["precipitation_inch"], float)
 
@@ -45,8 +50,9 @@ def test_weather_endpoint_ambiguous_location(client):
     assert response.status_code == 200
     data = response.json()
     assert data["location"] == "Springfield"
-    assert isinstance(data["latitude"], float)
-    assert isinstance(data["longitude"], float)
+    # Springfield, Missouri is around 37.21°N, 93.30°W
+    assert approx_equals(data["latitude"], 37.21533)
+    assert approx_equals(data["longitude"], -93.29824)
 
 
 def test_weather_endpoint_invalid_location(client):

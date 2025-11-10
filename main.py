@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 
 from services.geocoding import GeocodingService
 from services.weather import WeatherService
@@ -15,8 +15,22 @@ app = FastAPI(
 )
 
 
+def get_geocoding_service() -> GeocodingService:
+    """Dependency for GeocodingService."""
+    return GeocodingService()
+
+
+def get_weather_service() -> WeatherService:
+    """Dependency for WeatherService."""
+    return WeatherService()
+
+
 @app.get("/weather", response_model=WeatherResponse)
-async def get_weather(location: str) -> WeatherResponse:
+async def get_weather(
+    location: str,
+    geocoding_service: GeocodingService = Depends(get_geocoding_service),
+    weather_service: WeatherService = Depends(get_weather_service),
+) -> WeatherResponse:
     """
     Get current weather for a specified location.
 
@@ -29,11 +43,9 @@ async def get_weather(location: str) -> WeatherResponse:
 
     try:
         # Get coordinates from location string
-        geocoding_service = GeocodingService()
         latitude, longitude = await geocoding_service.get_coordinates(location)
 
         # Get weather for those coordinates
-        weather_service = WeatherService()
         weather = await weather_service.get_weather(latitude, longitude)
 
         return WeatherResponse(
