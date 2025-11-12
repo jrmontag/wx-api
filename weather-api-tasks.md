@@ -7,8 +7,8 @@
 - [x] Task 3: GeocodingService
 - [x] Task 4: WeatherService
 - [x] Task 5: Integration
-- [ ] Task 6: Configuration & Models
-- [ ] Task 7: Testing & Refinement
+- [x] Task 6: Configuration & Models
+- [x] Task 7: Testing & Refinement
 - [ ] Task 8: Caching (Future)
 - [ ] Task 9: Tech Debt & Cleanup
 
