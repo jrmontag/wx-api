@@ -2,6 +2,7 @@ import logging
 
 import httpx
 
+from config import settings
 from models import Location
 
 logger = logging.getLogger(__name__)
@@ -9,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class GeocodingService:
     """Service for converting location names to coordinates using Open-Meteo Geocoding API."""
-
-    BASE_URL = "https://geocoding-api.open-meteo.com/v1/search"
-    TIMEOUT = 10.0
 
     async def get_coordinates(self, location: str) -> Location:
         """
@@ -30,9 +28,9 @@ class GeocodingService:
         try:
             async with httpx.AsyncClient() as client:
                 response = await client.get(
-                    self.BASE_URL,
-                    params={"name": location, "count": 3},
-                    timeout=self.TIMEOUT,
+                    settings.geocoding_base_url,
+                    params={"name": location, "count": settings.geocoding_result_count},
+                    timeout=settings.geocoding_timeout,
                 )
                 response.raise_for_status()
                 data = response.json()

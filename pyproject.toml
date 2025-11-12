@@ -8,6 +8,7 @@ dependencies = [
     "fastapi[standard]>=0.121.1",
     "httpx>=0.28.1",
     "pydantic>=2.12.4",
+    "pydantic-settings>=2.6.1",
     "uvicorn>=0.38.0",
 ]
 

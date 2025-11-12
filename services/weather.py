@@ -2,6 +2,7 @@ import logging
 
 import httpx
 
+from config import settings
 from models import WeatherStatus
 
 logger = logging.getLogger(__name__)
@@ -9,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 class WeatherService:
     """Service for fetching weather data using Open-Meteo Weather API."""
-
-    BASE_URL = "https://api.open-meteo.com/v1/forecast"
-    TIMEOUT = 10.0
 
     async def get_weather(self, latitude: float, longitude: float) -> WeatherStatus:
         """
@@ -31,7 +29,7 @@ class WeatherService:
         try:
             async with httpx.AsyncClient() as client:
                 response = await client.get(
-                    self.BASE_URL,
+                    settings.weather_base_url,
                     params={
                         "latitude": latitude,
                         "longitude": longitude,
@@ -41,7 +39,7 @@ class WeatherService:
                         "wind_speed_unit": "mph",
                         "precipitation_unit": "inch",
                     },
-                    timeout=self.TIMEOUT,
+                    timeout=settings.weather_timeout,
                 )
                 response.raise_for_status()
                 data = response.json()

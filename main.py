@@ -1,6 +1,7 @@
 from typing_extensions import Annotated
 from fastapi import FastAPI, HTTPException, Depends
 
+from config import settings
 from services.geocoding import GeocodingService
 from services.weather import WeatherService
 from models import WeatherResponse, Location
@@ -11,9 +12,7 @@ from exceptions import (
 )
 
 
-app = FastAPI(
-    title="Weather API", description="Simple weather API with Open-Meteo integration"
-)
+app = FastAPI(title=settings.app_title, description=settings.app_description)
 
 
 def get_geocoding_service() -> GeocodingService:
