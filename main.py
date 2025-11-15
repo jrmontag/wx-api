@@ -55,6 +55,8 @@ async def get_weather(
             latitude=location_data.latitude,
             longitude=location_data.longitude,
             country=location_data.country,
+            area_1=location_data.area_1,
+            area_2=location_data.area_2,
             temperature_fahrenheit=weather.temperature_fahrenheit,
             precipitation_inch=weather.precipitation_inch,
         )

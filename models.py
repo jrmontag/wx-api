@@ -1,5 +1,6 @@
 """Weather data models."""
 
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -10,6 +11,8 @@ class Location(BaseModel):
     latitude: float
     longitude: float
     country: str
+    area_1: Optional[str] = None
+    area_2: Optional[str] = None
 
 
 class WeatherStatus(BaseModel):
@@ -26,5 +29,7 @@ class WeatherResponse(BaseModel):
     latitude: float
     longitude: float
     country: str
+    area_1: Optional[str] = None
+    area_2: Optional[str] = None
     temperature_fahrenheit: float
     precipitation_inch: float

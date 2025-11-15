@@ -48,6 +48,8 @@ class GeocodingService:
                 longitude = first_result["longitude"]
                 name = first_result["name"]
                 country = first_result["country"]
+                area_1 = first_result.get("admin1")
+                area_2 = first_result.get("admin2")
 
                 logger.debug(
                     f"Geocoded location: {name}, {country} → ({latitude}, {longitude})"
@@ -58,6 +60,8 @@ class GeocodingService:
                     latitude=latitude,
                     longitude=longitude,
                     country=country,
+                    area_1=area_1,
+                    area_2=area_2
                 )
 
         except httpx.HTTPStatusError as e:

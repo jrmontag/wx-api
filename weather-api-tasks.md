@@ -159,18 +159,8 @@ weather-api/
 **Deliverables:**
 - Direct uvicorn invocation instead of FastAPI CLI wrapper
 
-## Running the Application
 
-```bash
-# Development
-uvicorn main:app --reload
 
-# Access docs
-http://localhost:8000/docs
-
-# Test endpoint
-curl "http://localhost:8000/weather?location=Denver"
-```
 
 ## Notes
 
