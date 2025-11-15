@@ -9,7 +9,7 @@
 - [x] Task 5: Integration
 - [x] Task 6: Configuration & Models
 - [x] Task 7: Testing & Refinement
-- [ ] Task 8: Caching (Future)
+- [x] Task 8: Caching
 - [ ] Task 9: Tech Debt & Cleanup
 
 ## Task Overview
@@ -139,16 +139,20 @@ weather-api/
 - Any bug fixes or refinements
 - Verification of all error scenarios
 
-### Task 8: Caching (Future)
-- Add cachetools dependency
-- Implement TTL cache for geocoding (24h)
-- Implement TTL cache for weather (30-60min)
-- Test cache hit/miss behavior
+### Task 8: Caching
+- Implement `SimpleTTLCache` class with no external dependencies
+- Create shared cache instance in `main.py` (persists across requests)
+- Implement cache checking in endpoint before API calls
+- Use prefixed keys: `geo:{location}` and `wx:{lat},{lon}`
+- Single 15-minute TTL for all cached entries
+- Test cache hit/miss behavior with load testing
 
 **Deliverables:**
-- In-memory caching implementation
-- Cache configuration in `config.py`
-- Performance improvement documentation
+- `cache.py`: SimpleTTLCache implementation
+- Shared cache instance in `main.py`
+- Cache logic integrated in `/weather` endpoint
+- `tests/load_test.py`: Load testing script for benchmarking
+- Performance improvement verified
 
 ### Task 9: Tech Debt & Cleanup
 
