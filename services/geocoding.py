@@ -61,7 +61,7 @@ class GeocodingService:
                     longitude=longitude,
                     country=country,
                     area_1=area_1,
-                    area_2=area_2
+                    area_2=area_2,
                 )
 
         except httpx.HTTPStatusError as e:

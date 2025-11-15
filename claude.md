@@ -14,3 +14,4 @@
 - After each change, run the linter and reformat the code 
 - If there is a test suite, also run the tests after each change; correct any issues
 - After each task, ask for confirmation and then commit the changes
+- Don't add verbose comments to code explaining "the what"; be targeted, comment on "the why" when it is perhaps not obvious

@@ -1,4 +1,6 @@
 from typing_extensions import Annotated
+import logging
+
 from fastapi import FastAPI, HTTPException, Depends
 
 from config import settings
@@ -14,6 +16,7 @@ from exceptions import (
 
 app = FastAPI(title=settings.app_title, description=settings.app_description)
 
+logging.basicConfig(level=logging.DEBUG)
 
 def get_geocoding_service() -> GeocodingService:
     """Dependency for GeocodingService."""
