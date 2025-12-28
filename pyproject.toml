@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi[standard]>=0.121.1",
+    "fastapi>=0.121.1",
     "httpx>=0.28.1",
     "pydantic>=2.12.4",
     "pydantic-settings>=2.6.1",
@@ -14,6 +14,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "fastapi[standard]>=0.121.1",
     "pytest>=8.4.2",
     "pytest-asyncio>=1.2.0",
     "ruff>=0.14.4",

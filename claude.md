@@ -15,3 +15,6 @@
 - If there is a test suite, also run the tests after each change; correct any issues
 - After each task, ask for confirmation and then commit the changes
 - Don't add verbose comments to code explaining "the what"; be targeted, comment on "the why" when it is perhaps not obvious
+
+# Docs
+- Inside the `docs/` folder are files guiding the project - each file is named for what the topic it covers
