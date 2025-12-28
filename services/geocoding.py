@@ -3,6 +3,7 @@ import logging
 import httpx
 
 from config import settings
+from exceptions import LocationNotFoundError, ExternalServiceError, DataParseError
 from models import Location
 
 logger = logging.getLogger(__name__)
@@ -35,14 +36,11 @@ class GeocodingService:
                 response.raise_for_status()
                 data = response.json()
 
-                # Check if we got any results
                 results = data.get("results", [])
                 if not results:
-                    from exceptions import LocationNotFoundError
-
                     raise LocationNotFoundError(f"No location found for: {location}")
 
-                # Return first result as Location object
+                # assume the first result is correct
                 first_result = results[0]
                 latitude = first_result["latitude"]
                 longitude = first_result["longitude"]
@@ -65,20 +63,14 @@ class GeocodingService:
                 )
 
         except httpx.HTTPStatusError as e:
-            from exceptions import ExternalServiceError
-
             raise ExternalServiceError(
                 f"Geocoding API returned status {e.response.status_code}"
             ) from e
         except (httpx.RequestError, TimeoutError) as e:
-            from exceptions import ExternalServiceError
-
             raise ExternalServiceError(
                 f"Failed to connect to Geocoding API: {e}"
             ) from e
         except KeyError as e:
-            from exceptions import DataParseError
-
             raise DataParseError(
                 f"Unexpected response format from Geocoding API: {e}"
             ) from e

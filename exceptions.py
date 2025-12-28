@@ -1,6 +1,3 @@
-"""Custom exceptions for the Weather API."""
-
-
 class LocationNotFoundError(Exception):
     """Raised when a location cannot be found via geocoding."""
 

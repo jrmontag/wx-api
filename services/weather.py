@@ -3,6 +3,7 @@ import logging
 import httpx
 
 from config import settings
+from exceptions import ExternalServiceError, DataParseError
 from models import WeatherStatus
 
 logger = logging.getLogger(__name__)
@@ -30,6 +31,7 @@ class WeatherService:
             async with httpx.AsyncClient() as client:
                 response = await client.get(
                     settings.weather_base_url,
+                    # note: params are specific to the particular weather API integration
                     params={
                         "latitude": latitude,
                         "longitude": longitude,
@@ -44,7 +46,6 @@ class WeatherService:
                 response.raise_for_status()
                 data = response.json()
 
-                # Extract current weather data
                 current = data["current"]
                 temperature_fahrenheit = current["temperature_2m"]
                 precipitation_inch = current["precipitation"]
@@ -60,18 +61,12 @@ class WeatherService:
                 )
 
         except httpx.HTTPStatusError as e:
-            from exceptions import ExternalServiceError
-
             raise ExternalServiceError(
                 f"Weather API returned status {e.response.status_code}"
             ) from e
         except (httpx.RequestError, TimeoutError) as e:
-            from exceptions import ExternalServiceError
-
             raise ExternalServiceError(f"Failed to connect to Weather API: {e}") from e
         except KeyError as e:
-            from exceptions import DataParseError
-
             raise DataParseError(
                 f"Unexpected response format from Weather API: {e}"
             ) from e

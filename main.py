@@ -17,8 +17,8 @@ from exceptions import (
 
 
 app = FastAPI(title=settings.app_title, description=settings.app_description)
-shared_cache = SimpleTTLCache(ttl_seconds=900)
 
+shared_cache = SimpleTTLCache(ttl_seconds=900)
 
 logging.basicConfig(level=logging.INFO)
 

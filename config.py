@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     # Application Settings
     app_title: str = "Weather API"
-    app_description: str = "Simple weather API with Open-Meteo integration"
+    app_description: str = "Simple weather API"
 
 
 # Global settings instance

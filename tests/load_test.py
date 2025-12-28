@@ -1,4 +1,12 @@
-"""Simple load test script to measure API performance and cache effectiveness."""
+"""Simple load test script to measure API performance and cache effectiveness.
+
+Not part of the automated pytest suite.
+
+Assumes the API is already running locally at http://localhost:8000
+
+Run in separate session with:
+> uv run python tests/load_test.py
+"""
 
 import time
 import sys
