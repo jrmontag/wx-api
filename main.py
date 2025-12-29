@@ -3,6 +3,7 @@ from typing_extensions import Annotated
 import logging
 
 from fastapi import FastAPI, HTTPException, Depends
+from mangum import Mangum
 
 from cache import SimpleTTLCache
 from config import settings
@@ -81,6 +82,10 @@ async def get_weather(
         raise HTTPException(status_code=503, detail=f"External service error: {str(e)}")
     except DataParseError as e:
         raise HTTPException(status_code=500, detail=f"Data parsing error: {str(e)}")
+
+
+# AWS Lambda handler
+handler = Mangum(app)
 
 
 if __name__ == "__main__":
