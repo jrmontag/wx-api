@@ -1,6 +1,6 @@
 # wx-api
 
-A simple weather API built with FastAPI, easy to deploy as an AWS Lambda zip archive.
+A simple weather API built with FastAPI, easy to deploy as an AWS Lambda zip archive. Built as an exercise in collaborating with a coding agent.
 
 ## Features
 
