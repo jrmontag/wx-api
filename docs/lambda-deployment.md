@@ -419,6 +419,6 @@ aws iam delete-role --role-name wx-api-lambda-role
 ## Reference
 
 - [uv AWS Lambda Example](https://github.com/astral-sh/uv-aws-lambda-example)
-- [Mangum Documentation](https://mangum.io/)
+- [Mangum Documentation](https://mangum.fastapiexpert.com)
 - [AWS Lambda Python Deployment](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html)
 - [Lambda Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html)
